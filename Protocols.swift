@@ -472,5 +472,251 @@ class User4: Identifiable2 {
 let u4 = User4(id: "123")
 u2.identify()
 
+/// init
+
+
+protocol TextDescription {
+    var name: String { get set }
+    func description()
+}
+extension Hamster: TextDescription {
+    func description() {
+        print("A hamster named \(name)")
+    }
+}
+
+class Hamster {
+    var name: String
+    init(name: String) {
+        self.name = name
+    }
+}
+
+var ham1 = Hamster(name: "Gerbil")
+ham1.description()
+
+
+
+
+protocol Employed {
+    func getSalary() -> Double
+    func commonFunc() -> String
+}
+extension Employed {
+    func getId() -> Int {
+        return 123
+    }
+    func commonFunc() -> String {
+        return "common string"
+    }
+}
+
+protocol Identifiable {
+    func getId() -> String
+    func commonFunc() -> Int
+}
+extension Identifiable {
+    func getId() -> String {
+        return "Id"
+    }
+    func commonFunc() -> Int {
+        return 123456
+    }
+}
+
+class Person1: Employed {
+    func getSalary() -> Double {
+        return 1
+    }
+}
+
+class Person2: Identifiable {
+    func getId() -> String {
+        return "123"
+    }
+}
+
+class Person3: Employed, Identifiable {
+    func getSalary() -> Double {
+        return 1
+    }
+    func getId() -> String {
+        return "Id person"
+    }
+}
+
+var o1 = Person3()
+var resStr: String = o1.commonFunc() // output: "common string"
+var resInt: Int = o1.commonFunc() // output: 123456
+
+let p11 = Person1()
+let p12 = Person2()
+let p13 = Person3()
+
+var arr: [AnyObject] = []
+arr.append(p11)
+arr.append(p12)
+arr.append(p13)
+
+func printDesc(for: Employed & Identifiable) {
+    print("hello")
+}
+
+printDesc(for: p13)
+// printDesc(for: p12) // error! Argument type 'Person2' does not conform to expected type 'Employed'
+// printDesc(for: p11) // error! Argument type 'Person1' does not conform to expected type 'Identifiable'
+
+for item in arr {
+    if let item = item as? Employed & Identifiable {
+        printDesc(for: item)
+    } else if let item = item as? Identifiable {
+        print(item.getId())
+    } else if let item = item as? Employed {
+        print(item.getSalary())
+    }
+}
+
+
+protocol DrawProtocol {
+    func draw() -> String
+}
+protocol SomeProtocol {
+    var num: Int {get set}
+    init(num: Int)
+}
+
+class DrawingStyle1: DrawProtocol, SomeProtocol {
+    var num: Int
+    required init(num: Int) {
+        self.num = num
+    }
+    init() {
+        self.num = 70
+    }
+    func draw() -> String {
+        return "Style 1"
+    }
+}
+
+class DrawingStyle2: DrawProtocol {
+    func draw() -> String {
+        return "Style 2"
+    }
+}
+
+class Painter {
+    var style: DrawProtocol
+    init(style: DrawProtocol){
+        self.style = style
+    }
+}
+
+var o2 = Painter(style: DrawingStyle1())
+if let style = o2.style as? SomeProtocol {
+    style.num
+}
+
+
+
+let d1 = DrawingStyle1(num: 56)
+let d2 = DrawingStyle2()
+var p1 = Painter(style: d1)
+p1.style = d2
+
+p1.style.draw()
+p1.style.draw()
+
+
+p1.style = d1
+if let style = p1.style as? DrawingStyle1 {
+    style.draw()
+}
+
+
+
+class SomeClass: SomeProtocol {
+    var num: Int
+    required init(num: Int) {
+        self.num = num
+    }
+}
+
+class SomeOtherClass: SomeClass {
+    init() {
+        super.init(num: 65)
+    }
+    required init(num: Int) {
+        super.init(num: num)
+    }
+}
+var o123 = SomeOtherClass(num: 123)
+o123.num // value of num is 123
+o123 = SomeOtherClass()
+o123.num // value of num is 65 by default
+
+// The use of the required modifier ensures that you provide an explicit or inherited implementation of the initializer requirement on all subclasses of the conforming class, such that they also conform to the protocol.
+
+
+
+// mutating functions in protocol
+// when the function needs to modify self
+protocol Togglable {
+    mutating func toggle()
+}
+
+enum OnOffSwitch: Togglable {
+    case off, on
+    mutating func toggle() {
+        switch self {
+        case .off:
+            self = .on
+        case .on:
+            self = .off
+        }
+    }
+}
+var lightSwitch = OnOffSwitch.off
+lightSwitch.toggle()
+lightSwitch.toggle()
+lightSwitch.toggle()
+
+
+/// Protocol inheritence
+protocol A {
+    func a()
+}
+
+protocol B {
+    func b()
+}
+
+protocol C {
+    func c()
+}
+
+
+protocol LetterProtocols: A, B, C { }
+
+extension LetterProtocols {
+    func a() {
+        print("a")
+    }
+}
+
+class AnotherClass: LetterProtocols {
+    // no need to implement a()
+    func b() {
+        
+    }
+    func c() {
+        
+    }
+}
+
+class YetAnotherClass: A {
+    func a() {
+        
+    }
+}
 
 
