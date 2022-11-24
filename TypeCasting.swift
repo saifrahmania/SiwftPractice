@@ -26,6 +26,10 @@ class Song:MediaItem{
 let library = [Movie(name: "Casa", director: "Blanka"),
 Song(name: "Blue", artist: "Suede")]
 
+/*
+    * this part works for downcasting
+*/
+
 for i in library{
     if let m = i as? Movie{
         print(m.director)
