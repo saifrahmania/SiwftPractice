@@ -201,3 +201,276 @@ let equalNumber  = [100,100,100,100]
 let differentNumber = [100,100,200,100,200]
 print(equalNumber.allEqual())
 print(differentNumber.allEqual())
+
+class Media {
+    var name: String
+    init(name: String) {
+        self.name = name
+    }
+}
+
+class Movie: Media {
+    private(set) var releaseYear: Int // private setter; i.e. we can get the value from outside the class' scope but cannot set it once it is initialized
+    var director: String
+    init(name: String, director: String, releaseYear: Int) {
+        self.director = director
+        self.releaseYear = releaseYear
+        super.init(name: name)
+    }
+}
+
+let mov1 = Movie(name: "mov1", director: "mov1d1", releaseYear: 2020)
+// mov1.releaseYear = 2017 //Cannot assign to property: 'releaseYear' setter is inaccessible
+
+class Song: Media {
+    var artist: String
+    init(name: String, artist: String) {
+        self.artist = artist
+        super.init(name: name)
+    }
+}
+
+// Type Casting
+
+let o1 = Movie(name: "abc", director: "def", releaseYear: 2011) // through type inference, type of o1 is Movie
+let o11: Media = o1 // upcasting; type of o11 is Media
+let o2 = o11 as? Movie // downcasting; type of o2 is Optional Movie (i.e. Movie?)
+
+var o12: Any = Movie(name: "abc", director: "def", releaseYear: 2012)
+o12 = o12 as! Media
+type(of: o12)
+
+if o12 is Media { // true
+    print("media")
+}
+if o12 is Movie{ // true
+    print("movie")
+}
+if o12 is Song{ // false
+    print("song")
+}
+
+let o3 = Song(name: "song1", artist: "artist1")
+let o4: Media? = o3
+
+let o5 = o4 as? Song
+o5?.artist
+
+let o6 = o4 as? Movie
+
+if let o6 = o6 {
+    o6.director
+}
+
+
+let m1 = Movie(name: "m1", director: "m1d1", releaseYear: 2019)
+let m2 = Movie(name: "m2", director: "m2d1", releaseYear: 2018)
+
+let s1 = Song(name: "s1", artist: "s1a1")
+let s2 = Song(name: "s2", artist: "s2a2")
+
+var mediaLib = [Media]()
+mediaLib.append(m1)
+mediaLib.append(s1)
+
+mediaLib[0].name
+// mediaLib[0].director //error: Value of type 'Media' has no member 'director'
+
+for item in mediaLib {
+    if item is Movie {
+        let movie = item as! Movie
+        print("\(movie.director)")
+    } else if item is Song {
+        let song = item as! Song
+        print("\(song.artist)")
+    }
+}
+
+for item in mediaLib {
+    if let movie = item as? Movie {
+        print("\(movie.director)")
+    } else if let song = item as? Song {
+        print("\(song.artist)")
+    }
+}
+
+
+/// Protocol
+
+class Person: Identifiable {
+    var id: String
+    var name: String
+    init(name: String, id: String) {
+        self.name = name
+        self.id = id
+    }
+    func getId() -> String {
+        return "person \(id)"
+    }
+}
+class Student: Identifiable {
+    internal var id: String
+    var name: String
+    var dept: String
+    init(name: String, dept: String, id: String) {
+        self.name = name
+        self.dept = dept
+        self.id = id
+    }
+}
+protocol Identifiable {
+    var id: String { get }
+    func getId() -> String
+}
+
+extension Identifiable {
+    func getId() -> String {
+        return id
+    }
+}
+
+var p31 = Person(name: "abc", id: "ryrt")
+print("\(p31.getId())")
+
+p31.id = "456"
+print("\(p31.id)")
+
+let s11 = Student(name: "bffs", dept: "aefse", id: "456")
+
+print("\(s11.getId())")
+
+
+let p112: Identifiable
+//p1.id = "123" // Cannot assign to property: 'id' is a get-only property
+
+let p1 = Person(name: "Bill", id: "458")
+p1.name
+
+
+
+
+// Protocol
+
+protocol Payable {
+    var hourlyWage: Double {get set}
+    var workedHours: Double {get set}
+    func calculateWages() -> Double
+}
+
+
+// Protocol conformance
+/// Person2 conforms to the Payable Protocol
+class Person2: Payable {
+    var hourlyWage: Double
+    var workedHours: Double
+    
+    init(hourlyWage: Double, workedHours: Double) {
+        self.hourlyWage = hourlyWage
+        self.workedHours = workedHours
+    }
+    
+    func calculateWages() -> Double {
+        return hourlyWage * workedHours
+    }
+}
+
+
+/// Protocol inheritance
+
+protocol NeedsTraining {
+    func study()
+}
+protocol HasVacation {
+    func takeVacation(days: Int)
+}
+protocol Employee: Payable, NeedsTraining, HasVacation { }
+
+class Person3: Employee {
+    var hourlyWage: Double
+    var workedHours: Double
+    
+    init(hourlyWage: Double, workedHours: Double) {
+        self.hourlyWage = hourlyWage
+        self.workedHours = workedHours
+    }
+    
+    func calculateWages() -> Double {
+        return 10.0
+    }
+    
+    func study() {
+        print("studying...")
+    }
+    
+    func takeVacation(days: Int) {
+        print("take a vacation of \(days) days")
+    }
+}
+
+
+
+// extensions
+
+extension Int {
+    func squared() -> Int {
+        return self * self
+    }
+}
+
+let number = 8
+number.squared()
+
+
+
+/// Protocol extensions
+
+let pythons = ["Eric", "Graham", "John", "Michael", "Terry", "Terry"]
+let beatles = Set(["John", "Paul", "George", "Ringo"])
+
+
+// Swift’s arrays and sets both conform to a protocol called Collection, so we can write an extension to that protocol to add a summarize() method to print the collection neatly
+extension Collection {
+    func summarize() {
+        print("There are \(count) of us:")
+        
+        for name in self {
+            print(name)
+        }
+    }
+}
+pythons.summarize()
+beatles.summarize()
+
+
+
+/// POP
+
+protocol Identifiable2 {
+    var id: String { get set }
+    func identify()
+}
+
+extension Identifiable2 {
+    func identify() {
+        print("My ID is \(id).")
+    }
+}
+
+struct User: Identifiable2 {
+    var id: String
+}
+
+let u2 = User(id: "123")
+u2.identify()
+
+class User4: Identifiable2 {
+    var id: String
+    init(id: String){
+        self.id = id
+    }
+}
+let u4 = User4(id: "123")
+u2.identify()
+
+
+
