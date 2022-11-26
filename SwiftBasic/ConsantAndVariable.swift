@@ -137,3 +137,98 @@ if i{
 }
 
 
+typealias AudioSample = UInt16
+var minAmplitudeFound = AudioSample.min
+
+var maxAmplitudeFound = AudioSample.max
+
+let decimalInteger = 17
+let binaryInteger = 0b10001 // 17 in binary notation
+let octalInteger = 0o21 // 17 in octal notation
+let hexadecimalInteger = 0x11 // 17 in hexadecimal notation
+
+let decimalDouble = 12.1875
+let exponentDouble = 1.21875e1
+let hexadecimalDouble = 0xC.3p0
+
+let paddedDouble = 000123.456
+let oneMillion = 1_000_000
+let justOverOneMillion = 1_000_000.000_000_1
+
+let http404Error = (404, "Not Found")
+let (statusCode, statusMessage) = http404Error
+print("The status code is \(statusCode)")
+// Prints "The status code is 404"
+print("The status message is \(statusMessage)")
+// Prints "The status message is Not Found"
+
+let (justTheStatusCode, _) = http404Error
+print("The status code is \(justTheStatusCode)")
+// Prints "The status code is 404"
+
+
+9 % 4
+-9 % 4
+9 % -4
+-9 % -4
+
+var a = 1
+a += 2
+// a is now equal to 3
+
+let b = 10
+let c = 10
+b == c
+b != c
+b > c
+b >= c
+b < c
+b <= c
+
+let name = "world"
+if name == "world" {
+    print("hello, world")
+} else {
+    print("I'm sorry \(name), but I don't recognize you")
+}
+
+let contentHeight = 40
+let hasHeader = true
+let rowHeight = contentHeight + (hasHeader ? 50 : 20)
+
+let defaultColorName = "red"
+var userDefinedColorName: String? // defaults to nil
+var colorNameToUse = userDefinedColorName ?? defaultColorName
+
+var threeDouble = [Double](repeating: 0.0, count: 3)
+var anotherThreeDouble = Array(repeating: 2.5, count: 3)
+var sixDouble = threeDouble + anotherThreeDouble
+var array1: [Int] = [1, 2, 3]
+var array2: [Int] = [4, 5, 6]
+var array3 = array1 + array2
+var shoppingList: [String] = ["Eggs", "Milk"]
+shoppingList += ["Flour"]
+shoppingList += ["Baking Powder"]
+shoppingList += ["Chocolate Spread", "Cheese", "Butter"]
+var firstItem = shoppingList[0]
+shoppingList[0] = "Six eggs"
+shoppingList[4...6] = ["Bananas", "Apples"]
+shoppingList.insert("Maple Syrup", at: 0)
+let mapleSyrup = shoppingList.remove(at: 0)
+let apples = shoppingList.removeLast()
+for item in shoppingList {
+    print(item)
+}
+
+for (index, value) in shoppingList.enumerated() {
+    print("Item \(index + 1): \(value)") //this enumerate will give the index of the array given
+
+}
+
+var letters = Set<Character>()
+
+
+//Slide 56
+
+
+
