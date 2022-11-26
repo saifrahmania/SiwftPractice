@@ -131,5 +131,9 @@ if i == 1 {
 }
 
 //Slide 29
+let i = true
+if i{
+    // this block will work because it does have the buulean values
+}
 
 
