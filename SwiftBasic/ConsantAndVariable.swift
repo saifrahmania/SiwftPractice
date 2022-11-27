@@ -229,6 +229,378 @@ var letters = Set<Character>()
 
 
 //Slide 56
+var letters = Set<Character>()
+print("letters is of type Set<Character> with \(letters.count) items.")
+// Prints "letters is of type Set<Character> with 0 items."
+letters.insert("a")
+// letters now contains 1 value of type Character
+letters = []
+// letters is now an empty set, but is still of type Set<Character>
+
+var favoriteGenres: Set<String> = ["Rock", "Classical", "Hip hop"]
+print("I have \(favoriteGenres.count) favorite music genres.")
+
+if favoriteGenres.isEmpty {
+    print("As far as music goes, I'm not picky.")
+} else {
+    print("I have particular music preferences.")
+}
+favoriteGenres.insert("Jazz")
+if let removedGenre = favoriteGenres.remove("Rock") {
+    print("\(removedGenre)? I'm over it.")
+} else {
+    print("I never much cared for that.")
+}
+if favoriteGenres.contains("Funk") {
+    print("I get up on the good foot.")
+} else {
+    print("It's too funky in here.")
+}
+
+let houseAnimals: Set = ["dog", "cat"]
+let farmAnimals: Set = ["cow", "chicken", "sheep", "dog", "cat"]
+let cityAnimals: Set = ["duck", "rabbit"]
+houseAnimals.isSubset(of: farmAnimals)
+farmAnimals.isSuperset(of: houseAnimals)
+farmAnimals.isDisjoint(with: cityAnimals)
+farmAnimals.isStrictSubset(of: cityAnimals)
+cityAnimals.symmetricDifference(farmAnimals)
+cityAnimals.union(farmAnimals)
+cityAnimals.intersection(farmAnimals)
+cityAnimals.subtracting(farmAnimals)
+var nameOfIntegers: [Int: String] = [:]
+nameOfIntegers[16] = "sixteen"
+nameOfIntegers = [:]
+var airports: [String: String] = ["YYZ": "Toronto Pearson", "DUB": "Dublin"]
+print("The airports dictionary contains \(airports.count) items.")
+if airports.isEmpty {
+    print("The airports dictionary is empty.")
+} else {
+    print("The airports dictionary is not empty.")
+}
+
+airports["LHR"] = "London"
+airports["LHR"] = "London Heathrow"
+if let oldValue = airports.updateValue("Dublin Airport", forKey: "DUB") {
+    print("The old value for DUB was \(oldValue).")
+}
+
+if let airportName = airports["DUB"] {
+    print("The name of the airport is \(airportName).")
+} else {
+    print("That airport is not in the airports dictionary.")
+}
+
+airports["APL"] = "Apple International"
+airports["APL"] = nil
+if let removedValue = airports.removeValue(forKey: "DUB") {
+    print("The removed airport's name is \(removedValue).")
+} else {
+    print("The airports dictionary does not contain a value for DUB.")
+}
+
+for (airportCode, airportName) in airports {
+    print("\(airportCode): \(airportName)")
+}
+
+for airportCode in airports.keys {
+    print("Airport code: \(airportCode)")
+}
+
+for airportName in airports.values {
+    print("Airport name: \(airportName)")
+}
+
+let airportCodes = [String](airports.keys)
+
+let airportNames = [String](airports.values)
+
+var namesOfIntegers = [Int: String]()
+namesOfIntegers[16] = "sixteen"
+namesOfIntegers = [:]
+
+let base = 3
+let power = 10
+var answer = 1
+for _ in 1...power {
+    answer *= base
+}
+
+print("\(base) to the power of \(power) is \(answer)")
+
+let minutes = 60
+for tickMark in 0..<minutes {
+    // render the tick mark each minute (60 times)
+}
+
+let minuteInterval = 5
+for tickMark in stride(from: 0, to: minutes, by: minuteInterval) {
+    // render the tick mark every 5 minutes (0, 5, 10, 15 ... 45, 50, 55)
+}
+
+let hours = 12
+let hourInterval = 3
+for tickMark in stride(from: 3, through: hours, by: hourInterval) {
+    // render the tick mark every 3 hours (3, 6, 9, 12)
+}
+
+let temparatureInFahrenheit = 30
+if temparatureInFahrenheit <= 32 {
+    print("It's very cold. Consider wearing a scarf.")
+} else if temparatureInFahrenheit >= 86 {
+    print("It's really warm. Don't forget to wear sunscreen.")
+} else {
+    print("It's not that cold. Wear a t-shirt.")
+}
+
+let someCharacter: Character = "z"
+switch someCharacter {
+case "a":
+    print("The first letter of the alphabet")
+case "z":
+    print("The last letter of the alphabet")
+default:
+    print("Some other character")
+}
+
+let anotherCharacter: Character = "a"
+switch anotherCharacter {
+case "a", "A":
+    print("The letter A")
+case "z", "Z":
+    print("The letter Z")
+default:
+    print("Not the letter A")
+}
 
 
+let approximateCount = 62
+let countedThings = "moons orbiting Saturn"
+var naturalCount: String
+switch approximateCount {
+case 0:
+    naturalCount = "no"
+case 1..<5:
+    naturalCount = "a few"
+case 5..<12:
+    naturalCount = "several"
+case 12..<100:
+    naturalCount = "dozens of"
+case 100..<1000:
+    naturalCount = "hundreds of"
+default:
+    naturalCount = "many"
+}
+
+print("There are \(naturalCount) \(countedThings).")
+
+let somePoint = (1,1)
+switch somePoint {
+case (0,0):
+    print("\(somePoint) is at the origin")
+case (_,0):
+    print("\(somePoint) is on the x-axis")
+case (0,_): 
+    print("\(somePoint) is on the y-axis")
+case (-2...2,-2...2):
+    print("\(somePoint) is inside the box")
+default:
+    print("\(somePoint) is outside of the box")
+}
+
+let integerToDescribe = 5
+var description = "The number \(integerToDescribe) is"
+switch integerToDescribe {
+case 2,3,5,7,11,13,17,19:
+    description += " a prime number, and also"
+    fallthrough
+default:
+    description += " an integer."
+}
+
+print(description)
+
+let puzzleInput = "great minds think alike"
+var puzzleOutput = ""
+for character in puzzleInput {
+    switch character {
+    case "a", "e", "i", "o", "u", " ":
+        continue
+    default:
+        puzzleOutput.append(character)
+    }
+}
+
+print(puzzleOutput)
+
+var index = 10
+repeat {
+    print("index is \(index)")
+    index += 1
+} while index < 10
+
+fancyLabel: for each in array{
+    for each in array{
+        if each == 1{
+            break fancyLabel
+        }
+    }
+}
+
+anotherLabel: for each in array{
+    for each in array{
+        if each == 1{
+            continue anotherLabel
+        }
+    }
+}
+
+
+switchLabel: switch someValue {
+case 1:
+    break switchLabel
+default:
+    break switchLabel
+}
+
+
+var index = 0
+let number  = [1,4,6 25,17,8]
+outlerLoop: while index < numbers.count{
+    innerLoop: for number in numbers{
+        switch number{
+            case 25:
+                continue innerLoop
+            case 17:
+                continue outlerLoop
+            default:
+                break
+        }
+        print(number)
+    }
+    index += 1
+}
+
+func greet(person: [String,String]) {
+    guard let name = person ["name"] else {
+        return
+    }
+    print("Hello \(name)!")
+    guard let location = person["location"] else {
+        print("I hope the weather is nice near you.")
+        return
+    }
+    print("I hope the weather is nice in \(location).")
+}
+
+greet(person: ["name": "John"])
+// Prints "Hello John!"
+// Prints "I hope the weather is nice near you."
+greet(person: ["name": "Jane", "location": "Cupertino"])
+// Prints "Hello Jane!"
+// Prints "I hope the weather is nice in Cupertino."
+
+enum CompassPoint {
+    case north
+    case south
+    case east
+    case west
+}
+
+enum Planet {
+    case mercury, venus, earth, mars, jupiter, saturn, uranus, neptune
+}
+
+directionToHead = .south
+switch directionToHead {
+case .north:
+    print("Lots of planets have a north")
+case .south:
+    print("Watch out for penguins")
+case .east:
+    print("Where the sun rises")
+case .west:
+    print("Where the skies are blue")
+}
+
+enum Barcode {
+    case upc(Int, Int, Int, Int)
+    case qrCode(String)
+}
+
+var productBarcode = Barcode.upc(8, 85909, 51226, 3)
+productBarcode = .qrCode("ABCDEFGHIJKLMNOP")
+
+switch productBarcode {
+case .upc(let numberSystem, let manufacturer, let product, let check):
+    print("UPC: \(numberSystem), \(manufacturer), \(product), \(check).")
+case .qrCode(let productCode):
+    print("QR code: \(productCode).")
+}
+
+enum Baverage: CaseIterable {
+    case coffee, tea, juice
+}
+
+let numberOfChoices = Baverage.allCases.count
+print("\(numberOfChoices) beverages available")
+// Prints "3 beverages available"
+
+for beverage in Baverage.allCases {
+    print(beverage)
+}
+
+enum Distance{
+    case km(String)
+    case m(String)
+    case cm(String)
+    case mm(String)
+
+}
+Distance.km("Metric System")
+var dist1 = Distance,km("Metric System")
+print(dist1)
+
+var dist2 = Distance.miles("Imperial System")
+print(dist2)
+
+enum Marks{
+    case gpa(Double,Double,Double)
+    case grade(String,String,String)
+}
+
+var marks1 = Marks.gpa(3.6,2.9,3.8 )
+print(marks1)
+
+var marks2 = Marks.grade("A","B","C")
+print(marks2)
+
+enum Pizza{
+    case small (inches: Int)
+    case medium (inches: Int)
+    case large (inches: Int)
+
+}
+
+var pizza1 = Pizza.small(inches: 12)
+print(pizza1)
+
+enum Mercedes{
+    case sedan(height: Double)
+    case suv(height: Double)
+    case rodester(height: Double)
+
+}
+
+var choice  = Mercedes.sedan(height: 5.5)
+switch(choice){
+    case .sedan(let height):
+        print("Height of sedan is \(height)")
+    case .suv(let height):
+        print("Height of suv is \(height)")
+    case .rodester(let height):
+        print("Height of rodester is \(height)")
+}
+
+//Slide 112
 
