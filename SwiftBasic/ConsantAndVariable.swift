@@ -40,7 +40,12 @@ two
 """
 print(badStart)
 */
-var shoppingList = ["catfish", "water", "tulips", "blue paint"]
+/*
+    * Due to the ofline compiler limitation 
+    * I was not able to test the code below
+*/
+
+var shoppingList = ["ratfish", "water", "tulips", "blue paint","Hilsha"]
 /*for character in shoppingList{
     print(character)
 }*/
@@ -604,3 +609,254 @@ switch(choice){
 
 //Slide 112
 
+enum Marks{
+    case grade (String)
+    case gpa(Double)
+}
+
+var marks = Marks.grade("A")
+switch(marks){
+    case .grade(let grade):
+        print("Grade is \(grade)")
+    case .gpa(let gpa):
+        print("GPA is \(gpa)")
+}
+
+var serverResponseCode: Int? = 404
+serverResponseCode = nil
+let possibleNumber = "123"
+let convertedNumber = Int(possibleNumber)
+print(convertedNumber)
+
+if convertedNumber != nil {
+    print("convertedNumber contains some integer value.")
+}
+
+if convertedNumber != nil {
+    print("The string  \(possibleNumber) has an integer value of \(actualNumber)")
+}
+else {
+    print(" The string \(possibleNumber) could not be converted to an integer")
+}
+
+let myNumber = Int(possibleNumber)
+if let myNumber = myNumber{
+    print("My number is \(myNumber)")
+}
+
+if let myNumber {
+    print("My number is \(myNumber)")
+}
+guard let myNumber = myNumber else {
+    print("My number is \(myNumber)")
+}
+
+if let firstNumber  = Int("4"), let secondNumber = Int("42"), firstNumber < secondNumber && secondNumber < 100 {
+    print("\(firstNumber) < \(secondNumber) < 100")
+}
+
+if let firstNumber = Int("4"){
+    if let secondNumber = Int("42"){
+        if firstNumber < secondNumber && secondNumber < 100 {
+            print("\(firstNumber) < \(secondNumber) < 100")
+        }
+    }
+}
+
+let someNumber: Int? = 5
+finc upwrapWithGuard(value:Int?)-> Int {
+    guard let value = value else {
+        return 0
+    }
+    return value
+}
+
+let possibleString: String? = "An optional string."
+let forcedString: String = possibleString! // requires an exclamation point
+let assumingString: String! = "An implicitly unwrapped optional string."
+let implicitString: String = assumingString // no need for an exclamation point
+
+let optionalString = assumingString
+if assumingString != nil {
+    print(assumingString!)
+}
+
+if let definiteString = assumingString {
+    print(definiteString)
+}
+
+let defaultColorName = "red"
+var userDefinedColorName: String? // defaults to nil
+var colorNameToUse = userDefinedColorName ?? defaultColorName
+userDefinedColorName = "green"
+colorNameToUse = userDefinedColorName ?? defaultColorName
+func geet(person:String)->String{
+    let greeting = "Hello, " + person + "!"
+    return greeting
+}
+
+print(greet(person: "Anna"))
+// Prints "Hello, Anna!"
+print(greet(person: "Brian"))
+// Prints "Hello, Brian!"
+func greetAgain(person: String) -> String {
+    return "Hello again, " + person + "!"
+}
+print(greetAgain(person: "Anna"))
+// Prints "Hello again, Anna!"
+func minMax(array: [Int]) -> (min: Int, max: Int) {
+    var currentMin = array[0]
+    var currentMax = array[0]
+    for value in array[1..<array.count] {
+        if value < currentMin {
+            currentMin = value
+        } else if value > currentMax {
+            currentMax = value
+        }
+    }
+    return (currentMin, currentMax)
+}
+
+let bounds = minMax(array: [8, -6, 2, 109, 3, 71])
+print("min is \(bounds.min) and max is \(bounds.max)")
+// Prints "min is -6 and max is 109"
+func someFunction(firstParameterName: Int, secondParameterName: Int) {
+    // In the function body, firstParameterName and secondParameterName
+    // refer to the argument values for the first and second parameters.
+}
+
+someFunction(firstParameterName: 1, secondParameterName: 2)
+func greeting(for person: String) -> String {
+    "Hello, " + person + "!"
+}
+print(greeting(for: "Dave"))
+
+func anotherGreetig(for person: String) -> String {
+    "Hello, " + person + "!"
+}
+
+print(anotherGreetig(for: "Dave"))
+func someFunction(argumentlabel parameterName: Int) {
+    // In the function body, parameterName refers to the argument value
+    // for that parameter.
+}
+
+func greet( person: String, from hometown: String) -> String {
+    "Hello \(person)!  Glad you could visit from \(hometown)."
+}
+
+print(greet(person: "Bill", from: "Cupertino"))
+
+func greet(person:String, from hometown:String) -> String {
+    "Hello \(person)! Glad you could visit from \(hometown)."
+}
+print(greet(person: "Bill", from: "Cupertino"))
+func greet(_ person: String, from hometown: String) -> String {
+    "Hello \(person)! Glad you could visit from \(hometown)."
+}
+print(greet("Bill", from: "Cupertino"))
+
+func greet(_ person: String, from hometown: String  = "Cupertino") -> String {
+    "Hello \(person)! Glad you could visit from \(hometown)."
+}
+
+print(greet("Bill"))
+
+import Foundation
+func printDate(_ date: Date, format: String = "YY-MM-dd") {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = format
+    return dateFormatter.string(from: date)
+
+}
+printDate(Date())
+printDate(Date(), format: "YY-MM-dd")
+
+func aritmeticMean(_ numbers: Double...) -> Double {
+    var total: Double = 0
+    for number in numbers {
+        total += number
+    }
+    return total / Double(numbers.count)
+}
+
+aritmeticMean(1, 2, 3, 4, 5)
+aritmeticMean(3, 8.25, 18.75)
+
+func alignRight(_ string: String, totalLength: Int, pad: Character) -> String {
+    let amountToPad = totalLength - string.count
+    if amountToPad < 1 {
+        return string
+    }
+    let padString = String(pad)
+    var padding = ""
+    for _ in 1...amountToPad {
+        padding += padString
+    }
+    return padding + string
+}
+
+let originalString = "hello"
+let paddedString = alignRight(originalString, totalLength: 10, pad: "-")
+print(paddedString)
+// Prints "-----hello"
+
+func swapTwoInts(_ a: inout Int, _ b: inout Int) {
+    let temporaryA = a
+    a = b
+    b = temporaryA
+}
+
+var someInt = 3
+var anotherInt = 107
+swapTwoInts(&someInt, &anotherInt)
+print("someInt is now \(someInt), and anotherInt is now \(anotherInt)")
+// Prints "someInt is now 107, and anotherInt is now 3"
+func addTwoInts(_ a: Int, _ b: Int) -> Int {
+    return a + b
+}
+
+func multiplyTwoInts(_ a: Int, _ b: Int) -> Int {
+    return a * b
+}
+
+func printHelloWorld() {
+    print("hello, world")
+}
+
+var mathFunction: (Int, Int) -> Int = addTwoInts
+mathFunction = multiplyTwoInts
+print("Result: \(mathFunction(2, 3))")
+// Prints "Result: 6"
+let anotherMathFunction = addTwoInts
+func printMathResult(_ mathFunction: (Int, Int) -> Int, _ a: Int, _ b: Int) {
+    print("Result: \(mathFunction(a, b))")
+}
+
+printMathResult(addTwoInts, 3, 5)
+// Prints "Result: 8"
+func stepForward(_ input: Int) -> Int {
+    return input + 1
+}
+
+func stepBackward(_ input: Int) -> Int {
+    return input - 1
+}
+
+func chooseStepFunction(backward: Bool) -> (Int) -> Int {
+    return backward ? stepBackward : stepForward
+}
+
+var currentValue = 3
+let moveNearerToZero = chooseStepFunction(backward: currentValue > 0)
+// moveNearerToZero now refers to the stepBackward() function
+print("Counting to zero:")
+
+while currentValue != 0 {
+    print("\(currentValue)... ")
+    currentValue = moveNearerToZero(currentValue)
+}
+print("zero!")
+
+
+//Slide 148
